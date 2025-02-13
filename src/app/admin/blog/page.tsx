@@ -1,3 +1,5 @@
+"use client";
+
 // blog adding and management page
 import { createBlog } from '@/lib/utils/api';
 import React, { useState } from 'react';
