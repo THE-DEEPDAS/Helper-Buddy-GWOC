@@ -48,19 +48,6 @@ export default function PartnerRegisterPage() {
 
   return (
     <div className="p-4 max-w-md mx-auto">
-<<<<<<< HEAD
-      <h1 className="text-center mb-4 text-2xl">Service Provider Registration</h1>
-      <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label htmlFor="email" className="form-label">Provider Email</label>
-          <input type="email" className="form-control" id="email" value={email} onChange={(e) => setEmail(e.target.value)} autoComplete="email" aria-describedby="emailHelp" />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="password" className="form-label">Password</label>
-          <input type="password" className="form-control" id="password" value={password} onChange={(e) => setPassword(e.target.value)} autoComplete="current-password" />
-        </div>
-        <button type="submit" className="btn btn-primary">Register</button>
-=======
       <h1 className="mb-4 text-2xl">Service Provider Registration</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
         <input
@@ -117,7 +104,6 @@ export default function PartnerRegisterPage() {
         >
           Register
         </button>
->>>>>>> ea554a3fdc6c5201109456832085d15922b9aef7
       </form>
     </div>
   );
