@@ -49,7 +49,7 @@ const sampleServices: Service[] = [
 
 export default function Home() {
   const [services] = useState<Service[]>(sampleServices);
-  const [_, setUser] = useState<User | null>(null);
+  const setUser = useState<User | null>(null)[1];
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
 
