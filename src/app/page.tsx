@@ -226,6 +226,31 @@ export default function Home() {
             </div>
           </section>
 
+          {/* Testimonials Section */}
+          <section className="relative mt-16 px-4">
+            <h2 className="text-3xl font-bold text-center mb-8">
+              Customer Testimonials
+            </h2>
+            <div className="max-w-6xl mx-auto">
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="bg-white rounded-lg shadow-sm p-6">
+                  <p className="text-gray-600">
+                    &quot;HelperBuddy provided excellent service! My house has
+                    never been cleaner.&quot;
+                  </p>
+                  <h5 className="text-xl font-semibold mt-2">- John Doe</h5>
+                </div>
+                <div className="bg-white rounded-lg shadow-sm p-6">
+                  <p className="text-gray-600">
+                    &quot;The plumbing service was quick and efficient. Highly
+                    recommend!&quot;
+                  </p>
+                  <h5 className="text-xl font-semibold mt-2">- Jane Smith</h5>
+                </div>
+              </div>
+            </div>
+          </section>
+
           {/* Contact Section */}
           <section className="relative mt-16 px-4 mb-16">
             <h2 className="text-3xl font-bold text-center mb-8">
