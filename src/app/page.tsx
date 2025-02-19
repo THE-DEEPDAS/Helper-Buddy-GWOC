@@ -7,6 +7,7 @@ import { Service } from "@/lib/types";
 import ServiceCard from "@/components/ui/ServiceCard";
 import jwt from "jsonwebtoken";
 import Loader from "../../public/assets/Loader.gif";
+import User from "@/lib/types/User";
 
 const JWT_SECRET = process.env.JWT_SECRET!;
 
@@ -48,7 +49,7 @@ const sampleServices: Service[] = [
 
 export default function Home() {
   const [services] = useState<Service[]>(sampleServices);
-  const [user, setUser] = useState<any>(null);
+  const [_, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
 
@@ -213,11 +214,12 @@ export default function Home() {
                     How can I find good cleaning services near me?
                   </h5>
                   <p className="text-gray-600">
-                    If you&apos;re looking for reliable cleaning services nearby,
-                    Helper Buddy is the answer. We connect you with experienced
-                    cleaners who can handle everything from regular home
-                    cleaning to deep cleaning. Simply book through our platform,
-                    and we’ll send a trusted professional to your home.
+                    If you&apos;re looking for reliable cleaning services
+                    nearby, Helper Buddy is the answer. We connect you with
+                    experienced cleaners who can handle everything from regular
+                    home cleaning to deep cleaning. Simply book through our
+                    platform, and we’ll send a trusted professional to your
+                    home.
                   </p>
                 </div>
               </div>

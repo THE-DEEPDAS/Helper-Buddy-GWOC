@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { createContext, useContext, useState } from 'react';
-import { User } from '@/lib/types';
+import { createContext, useContext, useState } from "react";
+import User from "@/lib/types/User";
 
 interface AuthContextType {
   user: User | null;
@@ -15,10 +15,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
 
   const login = async (email: string, password: string) => {
-    // Add authentication logic here
-    // For example, you can call an API to authenticate the user
-    // and then set the user state with the authenticated user data
-    const authenticatedUser: User = { id: '1', email, userType: 'customer' }; // Replace with actual user data
+    if (password == password) {
+      console.log("password is correct");
+    }
+    const authenticatedUser: User = { id: "1", email, userType: "customer" }; // Replace with actual user data
     setUser(authenticatedUser);
   };
 
@@ -38,7 +38,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 export function useAuth() {
   const context = useContext(AuthContext);
   if (context === undefined) {
-    throw new Error('useAuth must be used within an AuthProvider');
+    throw new Error("useAuth must be used within an AuthProvider");
   }
   return context;
 }
