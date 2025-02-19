@@ -1,17 +1,17 @@
-export const fetchServices = async (filters?: {
+export const fetchServices = async (_filters?: {
   category?: string;
   pincode?: string;
   search?: string;
 }) => {
-  // API fetching logic
+  // API fetching logic (use _filters if needed)
 };
 
 export const bookService = async (
-  serviceId: string, 
-  dateTime: Date, 
-  remarks?: string
+  _serviceId: string, 
+  _dateTime: Date, 
+  _remarks?: string
 ) => {
-  // Booking logic
+  // Booking logic (use parameters if needed)
 };
 
 export const createBlog = async (title: string, content: string, imageUrl: string) => {
@@ -23,6 +23,7 @@ export const createBlog = async (title: string, content: string, imageUrl: strin
     });
     return response.json();
   } catch (error) {
+    console.error('Error creating blog:', error);
     throw new Error('Failed to create blog');
   }
 };
@@ -32,6 +33,7 @@ export const fetchPaginatedBlogs = async (page = 1) => {
     const response = await fetch(`/api/blogs?page=${page}`);
     return response.json();
   } catch (error) {
+    console.error('Error fetching blogs:', error);
     throw new Error('Failed to fetch blogs');
   }
 };

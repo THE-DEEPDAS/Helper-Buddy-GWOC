@@ -10,7 +10,7 @@ interface PaymentModalProps {
   onClose: () => void;
 }
 
-export default function PaymentModal({ amount, serviceId, isOpen, onClose }: PaymentModalProps) {
+export default function PaymentModal({ amount, isOpen, onClose }: PaymentModalProps) {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
@@ -28,7 +28,7 @@ export default function PaymentModal({ amount, serviceId, isOpen, onClose }: Pay
         amount: order.amount,
         currency: "INR",
         order_id: order.id,
-        handler: async (response: any) => {
+        handler: async () => {
           // Handle payment success
           router.push(`/booking/success?orderId=${order.id}`);
         },

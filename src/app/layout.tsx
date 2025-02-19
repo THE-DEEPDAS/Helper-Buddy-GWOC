@@ -7,7 +7,6 @@ import PreLoader from '@/components/ui/PreLoader';
 import Header from '@/components/layout/Header';
 import { AuthProvider } from '@/lib/contexts/AuthContext';
 import "bootstrap/dist/css/bootstrap.min.css";
-import dynamic from "next/dynamic";
 import AddBootstrap from "./AddBootstrap";
 import Footer from '@/components/layout/Footer';
 

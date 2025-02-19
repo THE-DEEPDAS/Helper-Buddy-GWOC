@@ -1,6 +1,5 @@
 "use client";
 
-import SearchBar from "@/components/ui/SearchBar";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
@@ -48,8 +47,8 @@ const sampleServices: Service[] = [
 ];
 
 export default function Home() {
-  const [services, setServices] = useState<Service[]>(sampleServices);
-  const [user, setUser] = useState<any>(null);
+  const [services] = useState<Service[]>(sampleServices);
+  const [setUser] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
 
@@ -86,27 +85,6 @@ export default function Home() {
     const timeout = setTimeout(() => setIsLoading(false), 2000);
     return () => clearTimeout(timeout);
   }, [router]);
-
-  const handleSearch = (query: string) => {
-    if (!query) {
-      setServices(sampleServices);
-      return;
-    }
-
-    const filtered = sampleServices.filter(
-      (service) =>
-        service.title.toLowerCase().includes(query.toLowerCase()) ||
-        service.description.toLowerCase().includes(query.toLowerCase()) ||
-        service.category.toLowerCase().includes(query.toLowerCase())
-    );
-    setServices(filtered);
-  };
-
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    setUser(null);
-  };
 
   return (
     <>
