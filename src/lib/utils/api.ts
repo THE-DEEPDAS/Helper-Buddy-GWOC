@@ -1,19 +1,9 @@
-export const fetchServices = async (_filters?: {
-  category?: string;
-  pincode?: string;
-  search?: string;
-}) => {
-  // API fetching logic (use _filters if needed)
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+export const fetchServices = async () => {
+  // API fetching logic
 };
 
-export const bookService = async (
-  _serviceId: string, 
-  _dateTime: Date, 
-  _remarks?: string
-) => {
-  // Booking logic (use parameters if needed)
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+export const bookService = async () => {
+  // Booking logic
 };
 
 export const createBlog = async (title: string, content: string, imageUrl: string) => {

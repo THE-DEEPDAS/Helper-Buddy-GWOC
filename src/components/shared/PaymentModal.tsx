@@ -10,10 +10,21 @@ interface PaymentModalProps {
   onClose: () => void;
 }
 
-// Declare Razorpay type globally
+interface RazorpayOptions {
+  key: string;
+  amount: number;
+  currency: string;
+  order_id: string;
+  handler: () => void;
+}
+
+interface Razorpay {
+  open: () => void;
+}
+
 declare global {
   interface Window {
-    Razorpay: any;
+    Razorpay: new (options: RazorpayOptions) => Razorpay;
   }
 }
 
@@ -30,8 +41,8 @@ export default function PaymentModal({ amount, isOpen, onClose }: PaymentModalPr
       });
       const order = await response.json();
       
-      const options = {
-        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+      const options: RazorpayOptions = {
+        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID!,
         amount: order.amount,
         currency: "INR",
         order_id: order.id,
