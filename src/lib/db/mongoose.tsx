@@ -17,8 +17,12 @@ export async function connectDB() {
     const conn = await mongoose.connect(MONGODB_URI as string);
     dbConnected = true;
     console.log(`MongoDB connected: ${conn.connection.host}`);
-  } catch (error: any) {
-    console.error('MongoDB connection error:', error.message);
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.error('MongoDB connection error:', error.message);
+    } else {
+      console.error('MongoDB connection error:', error);
+    }
     throw error;
   }
 }

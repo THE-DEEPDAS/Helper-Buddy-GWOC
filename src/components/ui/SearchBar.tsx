@@ -44,7 +44,7 @@ export default function SearchBar({
       setRecentSearches(updated);
       localStorage.setItem('recentSearches', JSON.stringify(updated));
     }
-  }, [debouncedQuery]);
+  }, [debouncedQuery, onSearch, recentSearches]);   
 
   useEffect(() => {
     // Load recent searches from localStorage

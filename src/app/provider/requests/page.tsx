@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '@/lib/auth';
 import { ServiceRequest } from '@/lib/types';
 import Button from '@/components/ui/Button';
@@ -9,13 +9,7 @@ export default function ServiceRequests() {
   const { user } = useAuth();
   const [pendingRequests, setPendingRequests] = useState<ServiceRequest[]>([]);
 
-  useEffect(() => {
-    if (user) {
-      fetchPendingRequests();
-    }
-  }, [user]);
-
-  const fetchPendingRequests = async () => {
+  const fetchPendingRequests = useCallback(async () => {
     try {
       const response = await fetch(`/api/provider/requests?status=pending&providerId=${user?.id}`);
       if (!response.ok) throw new Error('Failed to fetch requests');
@@ -24,7 +18,13 @@ export default function ServiceRequests() {
     } catch (error) {
       console.error('Error fetching requests:', error);
     }
-  };
+  }, [user]);
+
+  useEffect(() => {
+    if (user) {
+      fetchPendingRequests();
+    }
+  }, [user, fetchPendingRequests]);
 
   const handleRequestAction = async (requestId: string, action: 'accept' | 'reject') => {
     try {

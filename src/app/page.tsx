@@ -1,6 +1,5 @@
 "use client";
 
-import SearchBar from "@/components/ui/SearchBar";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
@@ -48,7 +47,7 @@ const sampleServices: Service[] = [
 ];
 
 export default function Home() {
-  const [services, setServices] = useState<Service[]>(sampleServices);
+  const [services] = useState<Service[]>(sampleServices);
   const [user, setUser] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
@@ -85,28 +84,7 @@ export default function Home() {
     // Hide loader after 2 seconds
     const timeout = setTimeout(() => setIsLoading(false), 2000);
     return () => clearTimeout(timeout);
-  }, [router]);
-
-  const handleSearch = (query: string) => {
-    if (!query) {
-      setServices(sampleServices);
-      return;
-    }
-
-    const filtered = sampleServices.filter(
-      (service) =>
-        service.title.toLowerCase().includes(query.toLowerCase()) ||
-        service.description.toLowerCase().includes(query.toLowerCase()) ||
-        service.category.toLowerCase().includes(query.toLowerCase())
-    );
-    setServices(filtered);
-  };
-
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    setUser(null);
-  };
+  }, [router, setUser]);
 
   return (
     <>
@@ -235,7 +213,7 @@ export default function Home() {
                     How can I find good cleaning services near me?
                   </h5>
                   <p className="text-gray-600">
-                    If you're looking for reliable cleaning services nearby,
+                    If you&apos;re looking for reliable cleaning services nearby,
                     Helper Buddy is the answer. We connect you with experienced
                     cleaners who can handle everything from regular home
                     cleaning to deep cleaning. Simply book through our platform,
@@ -281,7 +259,7 @@ export default function Home() {
                     autoComplete="email"
                   />
                   <p className="mt-1 text-sm text-gray-500">
-                    We'll never share your email with anyone else.
+                    We&apos;ll never share your email with anyone else.
                   </p>
                 </div>
                 <div>

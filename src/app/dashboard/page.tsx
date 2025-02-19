@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '@/lib/auth';
 import { ServiceRequest } from '@/lib/types';
 import Button from '@/components/ui/Button';
@@ -9,13 +9,7 @@ export default function DashboardPage() {
   const { user, isServiceProvider } = useAuth();
   const [serviceRequests, setServiceRequests] = useState<ServiceRequest[]>([]);
 
-  useEffect(() => {
-    if (isServiceProvider) {
-      fetchServiceRequests();
-    }
-  }, [isServiceProvider]);
-
-  const fetchServiceRequests = async () => {
+  const fetchServiceRequests = useCallback(async () => {
     try {
       const response = await fetch(`/api/service-requests?providerId=${user?.id}`);
       if (!response.ok) throw new Error('Failed to fetch requests');
@@ -24,7 +18,13 @@ export default function DashboardPage() {
     } catch (error) {
       console.error('Error fetching service requests:', error);
     }
-  };
+  }, [user?.id]);
+
+  useEffect(() => {
+    if (isServiceProvider) {
+      fetchServiceRequests();
+    }
+  }, [isServiceProvider, fetchServiceRequests]);
 
   const handleRequestAction = async (requestId: string, action: 'accept' | 'reject') => {
     try {

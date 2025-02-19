@@ -38,6 +38,7 @@ export default function PartnerRegisterPage() {
       await login(data.provider, data.token);
       router.push("/partner/dashboard");
     } catch (error) {
+      console.error("Registration error:", error);
       alert("Registration failed");
     }
   };

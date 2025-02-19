@@ -10,7 +10,7 @@ interface BookingFormProps {
   onSubmit: (data: { dateTime: Date; remarks: string }) => void;
 }
 
-export default function BookingForm({ service, onSubmit }: BookingFormProps) {
+export default function BookingForm({ onSubmit }: BookingFormProps) {
   const [dateTime, setDateTime] = useState('');
   const [remarks, setRemarks] = useState('');
 

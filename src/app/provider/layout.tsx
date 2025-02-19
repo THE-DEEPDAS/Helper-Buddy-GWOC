@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
 export default function ProviderLayout({ children }: { children: React.ReactNode }) {
-  const { user, isServiceProvider } = useAuth();
+  const { isServiceProvider } = useAuth();
   const router = useRouter();
 
   useEffect(() => {

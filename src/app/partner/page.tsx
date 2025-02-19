@@ -2,9 +2,17 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "@/lib/auth";
 
+// Define a type for service requests
+interface ServiceRequest {
+  _id: string;
+  serviceCategory: string;
+  requestedPincode: string;
+  dateTime: string;
+}
+
 export default function PartnerDashboard() {
   const { user } = useAuth();
-  const [requests, setRequests] = useState([]);
+  const [requests, setRequests] = useState<ServiceRequest[]>([]);
 
   useEffect(() => {
     if (!user?.id) return;
@@ -16,7 +24,7 @@ export default function PartnerDashboard() {
         if (!response.ok) {
           throw new Error("Failed to fetch requests");
         }
-        const data = await response.json();
+        const data: ServiceRequest[] = await response.json();
         setRequests(data);
       } catch (error) {
         console.error(error);
@@ -35,7 +43,7 @@ export default function PartnerDashboard() {
       if (!response.ok) {
         throw new Error("Failed to accept request");
       }
-      setRequests((prev) => prev.filter((r: any) => r._id !== requestId));
+      setRequests((prev) => prev.filter((r) => r._id !== requestId));
     } catch (error) {
       console.error(error);
     }
@@ -52,7 +60,7 @@ export default function PartnerDashboard() {
         <p>No pending requests.</p>
       ) : (
         <ul className="space-y-2">
-          {requests.map((req: any) => (
+          {requests.map((req) => (
             <li
               key={req._id}
               className="p-4 border rounded flex items-center justify-between"
