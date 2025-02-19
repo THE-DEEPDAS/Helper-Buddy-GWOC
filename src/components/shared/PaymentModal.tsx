@@ -10,6 +10,13 @@ interface PaymentModalProps {
   onClose: () => void;
 }
 
+// Declare Razorpay type globally
+declare global {
+  interface Window {
+    Razorpay: any;
+  }
+}
+
 export default function PaymentModal({ amount, isOpen, onClose }: PaymentModalProps) {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
@@ -34,7 +41,7 @@ export default function PaymentModal({ amount, isOpen, onClose }: PaymentModalPr
         },
       };
 
-      const paymentObject = new (window as any).Razorpay(options);
+      const paymentObject = new window.Razorpay(options);
       paymentObject.open();
     } catch (error) {
       console.error('Payment initialization failed:', error);
