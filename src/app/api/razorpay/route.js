@@ -6,3 +6,6 @@
 //   key_id: process.env.RAZORPAY_KEY_ID,
 //   key_secret: process.env.RAZORPAY_KEY_SECRET,
 // });
+
+// Remove the unused variable `_`
+// const _ = require('lodash');
