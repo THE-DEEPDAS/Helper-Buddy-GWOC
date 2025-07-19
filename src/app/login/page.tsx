@@ -2,8 +2,6 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-const JWT_SECRET = process.env.NEXT_PUBLIC_JWT_SECRET!; // Ensure this environment variable is set
-
 export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -36,21 +34,45 @@ export default function LoginPage() {
   };
 
   return (
-    <div className='container-fluid my-10 p-4 max-w-md mx-auto'>
-      <h1 className='text-center'>Sign In</h1>
+    <div className="container-fluid my-10 p-4 max-w-md mx-auto">
+      <h1 className="text-center">Sign In</h1>
       <form onSubmit={handleLogin}>
         <div className="mb-3">
           <label htmlFor="email" className="form-label">Email address</label>
-          <input type="email" className="form-control" id="email" value={email} placeholder='example@email.com' onChange={(e) => setEmail(e.target.value)} autoComplete="email" aria-describedby="emailHelp" />
-          <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
+          <input 
+            type="email" 
+            className="form-control" 
+            id="email" 
+            value={email} 
+            placeholder="example@email.com" 
+            onChange={(e) => setEmail(e.target.value)} 
+            autoComplete="email" 
+            aria-describedby="emailHelp" 
+          />
+          <div id="emailHelp" className="form-text">
+            We&apos;ll never share your email with anyone else.
+          </div>
         </div>
         <div className="mb-3">
           <label htmlFor="password" className="form-label">Password</label>
-          <input type="password" className="form-control" id="password" value={password} onChange={(e) => setPassword(e.target.value)} autoComplete="current-password" />
+          <input 
+            type="password" 
+            className="form-control" 
+            id="password" 
+            value={password} 
+            onChange={(e) => setPassword(e.target.value)} 
+            autoComplete="current-password" 
+          />
         </div>
         <div className="mb-3">
           <label className="form-label">Login as?</label>
-          <select className="form-select" aria-label="Default select example" value={userType} onChange={(e) => setUserType(e.target.value)} autoComplete="off">
+          <select 
+            className="form-select" 
+            aria-label="Default select example" 
+            value={userType} 
+            onChange={(e) => setUserType(e.target.value)} 
+            autoComplete="off"
+          >
             <option value="user">User</option>
             <option value="admin">Admin</option>
             <option value="serviceProvider">Service Provider</option>

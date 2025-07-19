@@ -1,7 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-import bcrypt from 'bcrypt';
-import { User } from '@/lib/models/User';
-import { connectDB } from '@/lib/db/mongoose';
 
 export async function POST(request: NextRequest) {
   const { pathname } = new URL(request.url);

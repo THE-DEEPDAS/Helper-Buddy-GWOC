@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '@/lib/auth';
 import { ServiceRequest } from '@/lib/types';
 import ServiceProviderForm from '@/components/ui/ServiceProviderForm';
@@ -10,13 +10,7 @@ export default function ProviderDashboard() {
   const [acceptedBookings, setAcceptedBookings] = useState<ServiceRequest[]>([]);
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
 
-  useEffect(() => {
-    if (user && isServiceProvider && isFormSubmitted) {
-      fetchAcceptedBookings();
-    }
-  }, [user, isServiceProvider, isFormSubmitted]);
-
-  const fetchAcceptedBookings = async () => {
+  const fetchAcceptedBookings = useCallback(async () => {
     try {
       const response = await fetch(`/api/provider/bookings?status=accepted&providerId=${user?.id}`);
       if (!response.ok) throw new Error('Failed to fetch bookings');
@@ -25,8 +19,14 @@ export default function ProviderDashboard() {
     } catch (error) {
       console.error('Error fetching bookings:', error);
     }
-  };
+  }, [user]);
 
+  useEffect(() => {
+    if (user && isServiceProvider && isFormSubmitted) {
+      fetchAcceptedBookings();
+    }
+  }, [user, isServiceProvider, isFormSubmitted, fetchAcceptedBookings]);
+  
   if (!isServiceProvider) {
     return <div>Access Denied</div>;
   }

@@ -17,18 +17,20 @@ export default function PartnerLoginPage() {
     e.preventDefault();
     try {
       const res = await fetch("/api/partner/login", {
-        // Updated API route path
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
+
       if (!res.ok) {
         throw new Error("Login failed");
       }
+
       const data = await res.json();
       await login(data.provider, data.token);
       router.push("/partner/dashboard");
     } catch (error) {
+      console.error("Login error:", error);
       alert("Login failed");
     }
   };
@@ -51,10 +53,7 @@ export default function PartnerLoginPage() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button
-          className="bg-blue-600 text-white py-2 px-4 rounded"
-          type="submit"
-        >
+        <button className="bg-blue-600 text-white py-2 px-4 rounded" type="submit">
           Login
         </button>
       </form>

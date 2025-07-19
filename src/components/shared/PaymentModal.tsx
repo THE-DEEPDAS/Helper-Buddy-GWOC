@@ -10,7 +10,25 @@ interface PaymentModalProps {
   onClose: () => void;
 }
 
-export default function PaymentModal({ amount, serviceId, isOpen, onClose }: PaymentModalProps) {
+interface RazorpayOptions {
+  key: string;
+  amount: number;
+  currency: string;
+  order_id: string;
+  handler: () => void;
+}
+
+interface Razorpay {
+  open: () => void;
+}
+
+declare global {
+  interface Window {
+    Razorpay: new (options: RazorpayOptions) => Razorpay;
+  }
+}
+
+export default function PaymentModal({ amount, isOpen, onClose }: PaymentModalProps) {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
@@ -23,18 +41,18 @@ export default function PaymentModal({ amount, serviceId, isOpen, onClose }: Pay
       });
       const order = await response.json();
       
-      const options = {
-        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+      const options: RazorpayOptions = {
+        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID!,
         amount: order.amount,
         currency: "INR",
         order_id: order.id,
-        handler: async (response: any) => {
+        handler: async () => {
           // Handle payment success
           router.push(`/booking/success?orderId=${order.id}`);
         },
       };
 
-      const paymentObject = new (window as any).Razorpay(options);
+      const paymentObject = new window.Razorpay(options);
       paymentObject.open();
     } catch (error) {
       console.error('Payment initialization failed:', error);

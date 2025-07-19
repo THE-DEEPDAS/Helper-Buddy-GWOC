@@ -7,10 +7,17 @@ interface User {
   email: string;
 }
 
+interface AuthProvider {
+  id: string;
+  email: string;
+  name: string;
+  role: string;
+}
+
 export function logout() {
   localStorage.removeItem('user');
   localStorage.removeItem('token');
-  window.location.reload(); // Force a reload to clear all states
+  window.location.reload();
 }
 
 export function useAuth() {
@@ -24,7 +31,7 @@ export function useAuth() {
       try {
         const parsedUser = JSON.parse(userData);
         setUser(parsedUser);
-        setIsServiceProvider(parsedUser.userType === 'serviceProvider');
+        setIsServiceProvider(parsedUser.role === 'serviceProvider'); // Ensure role is checked correctly
       } catch (error) {
         console.error('Error parsing user data from local storage:', error);
         setUser(null);
@@ -36,10 +43,8 @@ export function useAuth() {
     }
   }, []);
 
-  const login = async (provider: any, token: string) => {
-    // Store user & token in state or context
+  const login = async (provider: AuthProvider, token: string) => {
     setUser({ id: provider.id, email: provider.email, name: provider.name, role: provider.role });
-    // Also store token, e.g., localStorage
     localStorage.setItem("user", JSON.stringify(provider));
     localStorage.setItem("token", token);
   };

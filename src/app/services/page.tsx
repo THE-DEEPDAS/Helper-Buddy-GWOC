@@ -3,7 +3,7 @@
 import SearchBar from "@/components/ui/SearchBar";
 import ServiceCard from "@/components/ui/ServiceCard";
 import ServiceFilter from "@/components/shared/ServiceFilter";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Service } from "@/lib/types";
 import ServiceProviderForm from "@/components/ui/ServiceProviderForm";
 import { useAuth } from "@/lib/auth";
@@ -33,7 +33,7 @@ const sampleServices: Service[] = [
 
 export default function ServicesPage() {
   const [services, setServices] = useState<Service[]>(sampleServices);
-  const { user, isServiceProvider } = useAuth();
+  const { isServiceProvider } = useAuth();
 
   const handleSearch = (query: string) => {
     if (!query) {

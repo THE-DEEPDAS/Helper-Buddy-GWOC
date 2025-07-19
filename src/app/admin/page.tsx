@@ -1,3 +1,5 @@
+"use client";
+
 // admin dashboard main page
 import React, { useState } from 'react';
 
